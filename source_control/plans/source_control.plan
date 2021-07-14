@@ -5,6 +5,49 @@
 		<propertyMappings/>
 	</component-mappings>
 
+<!-- (Alter Format) --><step mode="NORMAL" className="com.ataccama.dqc.tasks.flow.AlterFormat" disabled="false" id="Alter Format">
+		<properties>
+			<addedColumns>
+				<addedColumn name="sco_default" type="INTEGER"/>
+				<addedColumn name="exp_default" type="STRING"/>
+			</addedColumns>
+			<removedColumns/>
+		</properties>
+		<visual-constraints layout="vertical" bounds="312,120,-1,-1"/>
+	</step>
+	<connection className="com.ataccama.dqc.model.elements.connections.StandardFlowConnection" disabled="false">
+		<source endpoint="out" step="Alter Format"/>
+		<target endpoint="in" step="Simple Scoring"/>
+		<visual-constraints>
+			<bendpoints/>
+		</visual-constraints>
+	</connection>
+
+
+
+<!-- (Simple Scoring) --><step mode="NORMAL" className="com.ataccama.dqc.tasks.scoring.SimpleScoring" disabled="false" id="Simple Scoring">
+		<properties defaultScoreColumn="sco_default" defaultExplainColumn="exp_default">
+			<scoringCases>
+				<scoringCase explanation="&quot;TYPE_NULL&quot;">
+					<condition>src_type is null
+</condition>
+					<score>1000
+</score>
+				</scoringCase>
+			</scoringCases>
+		</properties>
+		<visual-constraints layout="vertical" bounds="312,192,48,48"/>
+	</step>
+	<connection className="com.ataccama.dqc.model.elements.connections.StandardFlowConnection" disabled="false">
+		<source endpoint="out" step="Simple Scoring"/>
+		<target endpoint="in" step="out"/>
+		<visual-constraints>
+			<bendpoints/>
+		</visual-constraints>
+	</connection>
+
+
+
 <!-- (customers) --><step mode="NORMAL" className="com.ataccama.dqc.tasks.io.text.read.TextFileReader" disabled="false" id="customers">
 		<properties lineMaxReadLength="65536" fileName="../../jt_training/data/in/customers.csv" fieldSeparator="," stringQualifierEscape="" numberOfLinesInFooter="0" compression="NONE" encoding="ISO-8859-1" lineSeparator="\r\n" stringQualifier="" numberOfLinesInHeader="1">
 			<columns>
@@ -32,11 +75,11 @@
 			</errorHandlingStrategy>
 			<shadowColumns/>
 		</properties>
-		<visual-constraints layout="vertical" bounds="312,168,-1,-1"/>
+		<visual-constraints layout="vertical" bounds="312,48,-1,-1"/>
 	</step>
 	<connection className="com.ataccama.dqc.model.elements.connections.StandardFlowConnection" disabled="false">
 		<source endpoint="out" step="customers"/>
-		<target endpoint="in" step="out"/>
+		<target endpoint="in" step="Alter Format"/>
 		<visual-constraints>
 			<bendpoints/>
 		</visual-constraints>
