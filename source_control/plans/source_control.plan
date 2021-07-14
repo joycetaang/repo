@@ -29,8 +29,8 @@
 
 
 
-<!-- (customers) --><step mode="NORMAL" className="com.ataccama.dqc.tasks.io.text.read.TextFileReader" disabled="false" id="customers">
-		<properties lineMaxReadLength="65536" fileName="../../jt_training/data/in/customers.csv" fieldSeparator="," stringQualifierEscape="" numberOfLinesInFooter="0" compression="NONE" encoding="ISO-8859-1" lineSeparator="\r\n" stringQualifier="" numberOfLinesInHeader="1">
+<!-- (customers 2) --><step mode="NORMAL" className="com.ataccama.dqc.tasks.io.text.read.TextFileReader" disabled="false" id="customers 2">
+		<properties lineMaxReadLength="65536" fileName="../customers.csv" fieldSeparator="," stringQualifierEscape="" numberOfLinesInFooter="0" compression="NONE" encoding="ISO-8859-1" lineSeparator="\r\n" stringQualifier="" numberOfLinesInHeader="1">
 			<columns>
 				<textReaderColumn name="ser_customer_id" ignore="false" type="INTEGER">
 					<dataFormatParameters decimalSeparator="." thousandsSeparator=","/>
@@ -59,7 +59,7 @@
 		<visual-constraints layout="vertical" bounds="312,168,-1,-1"/>
 	</step>
 	<connection className="com.ataccama.dqc.model.elements.connections.StandardFlowConnection" disabled="false">
-		<source endpoint="out" step="customers"/>
+		<source endpoint="out" step="customers 2"/>
 		<target endpoint="in" step="Column Assigner"/>
 		<visual-constraints>
 			<bendpoints/>
